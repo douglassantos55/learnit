@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Timer from './Timer';
 import Counter from './Counter';
-import storage from './storage';
+import storage from '../storage';
 import Progress from './Progress';
 
 class Quiz extends React.Component {

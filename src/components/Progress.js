@@ -1,8 +1,8 @@
 import React from 'react';
-import storage from './storage';
+import storage from '../storage';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { formatPercentage } from './helper';
+import { formatPercentage } from '../helper';
 
 const Progress = ({ topic, handleRepeat }) => {
   const scores = storage.getByTopic(topic).slice(0, 4);

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const TOPICS = { 
+const TOPICS = {
   prepositions: 'Prepositions',
   articles: 'Articles',
-  adjectives: 'Adjectives'
+  adjectives: 'Adjectives',
+  adverbs: 'Adverbs'
 };
 
 const TopicsPage = () => (

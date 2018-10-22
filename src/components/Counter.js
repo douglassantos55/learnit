@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatPercentage } from './helper';
+import { formatPercentage } from '../helper';
 
 const percentage = (correct, total) => {
   if (!total) return formatPercentage(0);

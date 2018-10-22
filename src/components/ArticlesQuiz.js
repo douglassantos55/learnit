@@ -1,6 +1,7 @@
 import React from 'react';
-import ARTICLES from './data/articles';
 import Quiz from './Quiz';
+import { random, shuffle } from '../helper';
+import ARTICLES from '../data/articles';
 
 class ArticlesQuiz extends React.Component {
   constructor(props) {
@@ -19,21 +20,16 @@ class ArticlesQuiz extends React.Component {
     }
 
     return {
-      options: this.shuffle(options),
+      options: shuffle(options),
       correctAnswer: article.article,
       question: `${article.type} article, ${article.selectedCase}, ${article.gender}`
     };
   }
 
   getRandomArticle() {
-    const types = Object.keys(ARTICLES);
-    const type = types[Math.floor(Math.random() * types.length)];
-
-    const cases = Object.keys(ARTICLES[type]);
-    const selectedCase = cases[Math.floor(Math.random() * cases.length)];
-
-    const genders = Object.keys(ARTICLES[type][selectedCase]);
-    const gender = genders[Math.floor(Math.random() * genders.length)];
+    const type = random(Object.keys(ARTICLES));
+    const selectedCase = random(Object.keys(ARTICLES[type]));
+    const gender = random(Object.keys(ARTICLES[type][selectedCase]));
 
     return {
       type,
@@ -42,18 +38,6 @@ class ArticlesQuiz extends React.Component {
       answer: '',
       article: ARTICLES[type][selectedCase][gender]
     };
-  }
-
-  shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-
-    let options = {};
-    array.forEach(option => options[option] = option);
-
-    return options;
   }
 
   render() {

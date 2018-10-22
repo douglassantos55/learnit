@@ -1,6 +1,7 @@
 import React from 'react';
 import Quiz from './Quiz';
-import PREPOSITIONS from './data/prepositions';
+import { random } from '../helper';
+import PREPOSITIONS from '../data/prepositions';
 
 const OPTIONS = {
   'accusative': 'Accusative',
@@ -11,11 +12,8 @@ const OPTIONS = {
 
 class PrepositionsQuiz extends React.Component {
   generateQuestion() {
-    const cases = Object.keys(PREPOSITIONS);
-    const correctAnswer = cases[Math.floor(Math.random() * cases.length)];
-
-    const prepositions = PREPOSITIONS[correctAnswer];
-    const preposition = prepositions[Math.floor(Math.random() * prepositions.length)];
+    const correctAnswer = random(Object.keys(PREPOSITIONS));
+    const preposition = random(PREPOSITIONS[correctAnswer]);
 
     return {question: preposition, correctAnswer, options: OPTIONS};
   }

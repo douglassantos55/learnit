@@ -1,6 +1,8 @@
-import TopicsPage from './TopicsPage';
-import PrepositionsQuiz from './PrepositionsQuiz';
-import ArticlesQuiz from './ArticlesQuiz';
+import TopicsPage from './components/TopicsPage';
+import AdverbsQuiz from './components/AdverbsQuiz';
+import ArticlesQuiz from './components/ArticlesQuiz';
+import AdjectivesQuiz from './components/AdjectivesQuiz';
+import PrepositionsQuiz from './components/PrepositionsQuiz';
 
 const routes = [
   {
@@ -15,6 +17,14 @@ const routes = [
   {
     path: '/articles',
     component: ArticlesQuiz
+  },
+  {
+    path: '/adjectives',
+    component: AdjectivesQuiz
+  },
+  {
+    path: '/adverbs',
+    component: AdverbsQuiz
   }
 ];
 
