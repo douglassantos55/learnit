@@ -17,7 +17,7 @@ class Quiz extends React.Component {
       checking: false,
       total: 0,
       correct: 0,
-      timer: 60,
+      timer: 180,
       timesUp: false,
       options: {}
     };
@@ -93,10 +93,13 @@ class Quiz extends React.Component {
     const { options, correct, total, answer, timer, timesUp, question, checking, correctAnswer } = this.state;
 
     return <form onSubmit={this.checkAnswer}>
-      <Link to="/">&lt;-</Link>
+      <div className="header">
+        <Link to="/" className="back">&laquo;</Link>
 
-      <Counter correct={correct} total={total} />
-      <Timer timer={timer} />
+        <Counter correct={correct} total={total} />
+
+        <Timer timer={timer} />
+      </div>
 
       <h2>{question}</h2>
 
@@ -121,6 +124,7 @@ class Quiz extends React.Component {
               checked={answer === option}
               onChange={this.selectOption} />
             {options[option]}
+            <div className="check"></div>
           </label>
         })}
       </div>

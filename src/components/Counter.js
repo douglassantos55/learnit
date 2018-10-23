@@ -8,7 +8,10 @@ const percentage = (correct, total) => {
 };
 
 const Counter = ({ correct, total }) => (
-  <h1>{correct} / {total} - {percentage(correct, total)}</h1>
+  <div className="counter">
+    <span className="percentage">{percentage(correct, total)}</span>
+    {correct} / {total}
+  </div>
 );
 
 export default Counter;

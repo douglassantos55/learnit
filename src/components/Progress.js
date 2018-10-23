@@ -7,9 +7,9 @@ import { formatPercentage } from '../helper';
 const Progress = ({ topic, handleRepeat }) => {
   const scores = storage.getByTopic(topic).slice(0, 4);
   const latestScore = scores.shift();
-  console.log(scores);
 
   return <div className="progress">
+    <h1>Time's up!</h1>
     <h2>{formatPercentage(latestScore.percentage)}</h2>
 
     {scores.length > 0 && <div>
