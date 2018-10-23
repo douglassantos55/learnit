@@ -2,7 +2,7 @@
 
 html, body { height: 100%; }
 
-body { margin: 0; font-family: Arial; font-size: 16px }
+body { background: #f8f8f8; margin: 0; font-family: Arial; font-size: 16px }
 
 .progress { position: fixed; top: 50%; left: 50%; z-index: 10; width: 400px; max-width: 90%; background: #f2f2f2; padding: 20px; transform: translateX(-50%) translateY(-50%); box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.4); }
 
@@ -45,7 +45,7 @@ form {
   transform: translateX(-50%);
   display: inline-block;
   vertical-align: middle;
-  transition: transform 0.3s;
+  transition: all 0.25s;
   will-change: opacity, transform;
 }
 .back:hover:after {
@@ -88,10 +88,13 @@ form {
 }
 .options label {
   width: 49%;
-  padding: 10px 0 10px 45px;
+  padding: 14px 0 14px 45px;
   margin-bottom: 10px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   position: relative;
+  background: #fff;
+  transition: border .25s;
+  border-radius: 40px;
 }
 .options label .check {
   display: block;
@@ -100,12 +103,12 @@ form {
   border-radius: 100%;
   width: 25px;
   height: 25px;
-  top: 7px;
-  left: 7px;
+  top: 10px;
+  left: 10px;
   z-index: 5;
   transition: border .25s;
 }
-.options label .check:before, .options label .check:after {
+.options label .check:before {
   content: '';
   position: absolute;
   border-radius: 100%;
@@ -127,11 +130,14 @@ form {
 }
 .options label:hover {
   cursor: pointer;
-  background: #eee;
+  border-color: #28b8e6;
+}
+.options label.checked, .options label:hover .check {
+  border-color: #28b8e6;
 }
 .options label.correct {
-  background: #08ac00;
-  color: #fff;
+  color: #08ac00;
+  border-color: #08ac00;
   font-weight: 700;
 }
 .options label.correct .check:before {
@@ -141,32 +147,22 @@ form {
   height: 20px;
   border-radius: 0;
   background: none!important;
-  border: solid #fff;
+  border: solid #08ac00;
   border-width: 0 5px 5px 0;
   transform: rotate(45deg);
 }
 .options label.wrong {
-  background: red;
-  color: #fff;
+  border-color: red;
+  color: red;
   font-weight: 700;
 }
-.options label.wrong .check:before, .options label.wrong .check:after {
-  position: absolute;
-  top: -4px;
-  left: 10px;
-  content: ' ';
-  height: 33px;
-  width: 4px;
-  border-radius: 100%;
-  background-color: #fff!important;
+.options label.wrong .check {
+  border-color: red;
 }
 .options label.wrong .check:before {
-  transform: rotate(45deg);
+  background: red;
 }
-.options label.wrong .check:after {
-  transform: rotate(-45deg);
-}
-.options label.wrong .check, .options label.correct .check {
+.options label.correct .check {
   border: none!important;
 }
 
@@ -180,7 +176,7 @@ button {
   cursor: pointer;
   box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.2);
   border-radius: 40px;
-  transition: all 0.4s ease-out;
+  transition: all 0.25s ease-out;
 }
 button:hover {
   background: #178db3;
@@ -188,4 +184,33 @@ button:hover {
 button[disabled] {
   background: #ddd;
   cursor: not-allowed;
+}
+
+.topics-wrapper {
+  text-align: center;
+}
+.topics {
+  list-style: none;
+  padding: 0;
+  width: 300px;
+  margin: 60px auto 0;
+  max-width: 90%;
+}
+.topics li {
+  margin-bottom: 20px;
+}
+.topics li > a {
+  display: block;
+  text-decoration: none;
+  padding: 12px 20px;
+  border: 1px solid #28b8e6;
+  font-size: 1.2rem;
+  color: #28b8e6;
+  transition: all .35s;
+  font-weight: 600;
+  background: #fff;
+}
+.topics li > a:hover {
+  background: #28b8e6;
+  color: #fff;
 }

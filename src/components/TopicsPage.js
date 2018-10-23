@@ -10,8 +10,8 @@ const TOPICS = {
 };
 
 const TopicsPage = () => (
-  <div>
-    <h1>Topics</h1>
+  <div className="topics-wrapper">
+    <h1>Which topic would you like to practice?</h1>
 
     <ul className="topics">
       {Object.keys(TOPICS).map(

@@ -115,6 +115,8 @@ class Quiz extends React.Component {
             if (correctAnswer === option) {
               classname = 'correct';
             }
+          } else if (answer === option) {
+            classname = 'checked';
           }
 
           return <label key={i} className={classname}>
