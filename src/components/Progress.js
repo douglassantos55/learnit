@@ -8,7 +8,7 @@ const Progress = ({ topic, handleRepeat }) => {
   const scores = storage.getByTopic(topic).slice(0, 4);
   const latestScore = scores.shift();
 
-  return <div className="progress">
+  return <div className="dialog progress">
     <h1>Time's up!</h1>
     <h2>{formatPercentage(latestScore.percentage)}</h2>
 

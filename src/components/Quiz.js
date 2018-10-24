@@ -5,25 +5,31 @@ import Timer from './Timer';
 import Counter from './Counter';
 import storage from '../storage';
 import Progress from './Progress';
+import QuizConfiguration from './QuizConfiguration';
+
 
 class Quiz extends React.Component {
   constructor(props) {
     super(props);
+    this.baseTimer = storage.getTimer(this.props.topic);
 
     this.state = {
       question: '',
+      configure: false,
       answer: '',
       correctAnswer: '',
       checking: false,
       total: 0,
       correct: 0,
-      timer: 180,
+      timer: this.baseTimer,
       timesUp: false,
       options: {}
     };
 
     this.stop = this.stop.bind(this);
     this.reset = this.reset.bind(this);
+    this.saveTimer = this.saveTimer.bind(this);
+    this.changeTimer = this.changeTimer.bind(this);
     this.checkAnswer = this.checkAnswer.bind(this);
     this.selectOption = this.selectOption.bind(this);
   }
@@ -55,7 +61,7 @@ class Quiz extends React.Component {
       timesUp: false,
       checking: false,
       answer: '',
-      timer: 60
+      timer: this.baseTimer
     }));
 
     this.interval = setInterval(this.tick.bind(this), 1000);
@@ -63,7 +69,7 @@ class Quiz extends React.Component {
 
   stop() {
     const { correct, total } = this.state;
-    storage.setItem(this.props.topic, correct / total);
+    storage.setScore(this.props.topic, correct / total);
 
     this.setState({ timesUp: true });
   }
@@ -89,8 +95,19 @@ class Quiz extends React.Component {
     });
   }
 
+  changeTimer() {
+    this.setState({ configure: true });
+    clearInterval(this.interval);
+  }
+
+  saveTimer(timer) {
+    this.baseTimer = parseInt(timer);
+    storage.setTimer(this.props.topic, this.baseTimer);
+    this.setState({ configure: false }, this.reset);
+  }
+
   render() {
-    const { options, correct, total, answer, timer, timesUp, question, checking, correctAnswer } = this.state;
+    const { options, correct, total, answer, configure, timer, timesUp, question, checking, correctAnswer } = this.state;
 
     return <form onSubmit={this.checkAnswer}>
       <div className="header">
@@ -98,7 +115,7 @@ class Quiz extends React.Component {
 
         <Counter correct={correct} total={total} />
 
-        <Timer timer={timer} />
+        <Timer timer={timer} total={this.baseTimer} changeTimer={this.changeTimer} />
       </div>
 
       <h2>{question}</h2>
@@ -137,6 +154,8 @@ class Quiz extends React.Component {
       >{checking ? 'Next': 'Check'}</button>
 
       {timesUp && <Progress topic={this.props.topic} handleRepeat={this.reset} />}
+
+      {configure && <QuizConfiguration timer={this.baseTimer} save={this.saveTimer} />}
     </form>;
   }
 }

@@ -1,9 +1,10 @@
 class Storage {
   constructor() {
-    this.scores = this.getItems() || [];
+    this.scores = this.getScores() || [];
+    this.timers = this.getTimers() || {};
   }
 
-  getItems() {
+  getScores() {
     return JSON.parse(localStorage.getItem('scores'));
   }
 
@@ -11,9 +12,22 @@ class Storage {
     return this.scores.filter(score => score.topic === topic);
   }
 
-  setItem(topic, percentage) {
+  setScore(topic, percentage) {
     this.scores.unshift({ date: new Date(), topic, percentage });
     localStorage.setItem('scores', JSON.stringify(this.scores));
+  }
+
+  getTimers() {
+    return JSON.parse(localStorage.getItem('timers'));
+  }
+
+  getTimer(topic) {
+    return this.timers[topic] || 60;
+  }
+
+  setTimer(topic, seconds) {
+    this.timers[topic] = seconds;
+    localStorage.setItem('timers', JSON.stringify(this.timers));
   }
 }
 
