@@ -109,54 +109,56 @@ class Quiz extends React.Component {
   render() {
     const { options, correct, total, answer, configure, timer, timesUp, question, checking, correctAnswer } = this.state;
 
-    return <form onSubmit={this.checkAnswer}>
-      <div className="header">
-        <Link to="/" className="back">&laquo;</Link>
+    return <div className="quiz">
+      <form onSubmit={this.checkAnswer}>
+        <div className="header">
+          <Link to="/" className="back">&laquo;</Link>
 
-        <Counter correct={correct} total={total} />
+          <Counter correct={correct} total={total} />
 
-        <Timer timer={timer} total={this.baseTimer} changeTimer={this.changeTimer} />
-      </div>
+          <Timer timer={timer} total={this.baseTimer} changeTimer={this.changeTimer} />
+        </div>
 
-      <h2>{question}</h2>
+        <h2>{question}</h2>
 
-      <div className="options">
-        {Object.keys(options).map((option, i) => {
-          let classname = '';
+        <div className="options">
+          {Object.keys(options).map((option, i) => {
+            let classname = '';
 
-          if (checking) {
-            if (answer !== correctAnswer && answer === option) {
-              classname = 'wrong';
+            if (checking) {
+              if (answer !== correctAnswer && answer === option) {
+                classname = 'wrong';
+              }
+
+              if (correctAnswer === option) {
+                classname = 'correct';
+              }
+            } else if (answer === option) {
+              classname = 'checked';
             }
 
-            if (correctAnswer === option) {
-              classname = 'correct';
-            }
-          } else if (answer === option) {
-            classname = 'checked';
-          }
+            return <label key={i} className={classname}>
+              <input type="radio"
+                value={option}
+                disabled={option !== answer && (timesUp || checking)}
+                checked={answer === option}
+                onChange={this.selectOption} />
+              {options[option]}
+              <div className="check"></div>
+            </label>
+          })}
+        </div>
 
-          return <label key={i} className={classname}>
-            <input type="radio"
-              value={option}
-              disabled={timesUp || checking}
-              checked={answer === option}
-              onChange={this.selectOption} />
-            {options[option]}
-            <div className="check"></div>
-          </label>
-        })}
-      </div>
-
-      <button
-        type="submit"
-        disabled={!answer || timesUp}
-      >{checking ? 'Next': 'Check'}</button>
+        <button
+          type="submit"
+          disabled={!answer || timesUp}
+        >{checking ? 'Next': 'Check'}</button>
+      </form>
 
       {timesUp && <Progress topic={this.props.topic} handleRepeat={this.reset} />}
 
       {configure && <QuizConfiguration timer={this.baseTimer} save={this.saveTimer} />}
-    </form>;
+    </div>
   }
 }
 
