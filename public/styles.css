@@ -1,0 +1,236 @@
+* { box-sizing: border-box }
+
+html, body { height: 100%; }
+
+body { background: #f8f8f8; margin: 0; padding: 0 20px; font-family: Arial; font-size: 16px }
+
+.dialog { position: fixed; top: 50%; left: 50%; z-index: 10; width: 400px; max-width: 90%; background: #f2f2f2; padding: 20px; transform: translateX(-50%) translateY(-50%); box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.4); }
+
+.dialog h1 { margin-top: 0; }
+
+.progress h1 { margin: 0; }
+
+.progress h2 { color: #08ac00; font-size: 6rem; text-align: center; margin: 0; }
+
+.last-results { display: flex; justify-content: space-between; }
+
+.last-results h3 { font-size: 2.5rem; margin: 0; }
+
+.actions { display: flex; align-items: center; margin-top: 40px; justify-content: space-between; }
+
+.actions button { font-size: 1.2rem; padding: 12px 35px; }
+
+.actions a { text-decoration: none; }
+
+.actions a:hover { text-decoration: underline; }
+
+form {
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  margin-bottom: 3rem;
+  justify-content: space-between;
+}
+
+.back {
+  font-size: 4rem;
+  text-decoration: none;
+}
+.back:after {
+  content: 'Back';
+  font-size: 1.5rem;
+  margin-left: 10px;
+  opacity: 0;
+  transform: translateX(-50%);
+  display: inline-block;
+  vertical-align: middle;
+  transition: all 0.25s;
+  will-change: opacity, transform;
+}
+.back:hover:after {
+  opacity: 1;
+  transform: none;
+}
+
+.counter {
+  text-align: center;
+}
+
+.percentage {
+  display: block;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.timer {
+  text-align: center;
+}
+.timer.alert .seconds {
+  color: yellow;
+}
+.timer.danger .seconds {
+  color: red;
+}
+.seconds {
+  font-size: 3rem;
+  font-weight: bold;
+  display: block
+}
+.timer button {
+  font-size: 1rem;
+  margin-top: 20px;
+  padding: 12px 20px;
+}
+
+.options {
+  width: 70%;
+  display: flex;
+  margin: 3rem auto 2rem;
+  text-align: left;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.options label {
+  width: 49%;
+  padding: 14px 0 14px 45px;
+  margin-bottom: 10px;
+  border: 2px solid #eee;
+  position: relative;
+  background: #fff;
+  transition: border .25s;
+  border-radius: 40px;
+}
+.options label .check {
+  display: block;
+  position: absolute;
+  border: 2px solid #ddd;
+  border-radius: 100%;
+  width: 25px;
+  height: 25px;
+  top: 10px;
+  left: 10px;
+  z-index: 5;
+  transition: border .25s;
+}
+.options label .check:before {
+  content: '';
+  position: absolute;
+  border-radius: 100%;
+  height: 13px;
+  width: 13px;
+  top: 4px;
+  left: 4px;
+  transition: all .25s;
+}
+.options label:not(.wrong):not(.correct) input:checked  ~ .check {
+  border-color: #28b8e6;
+}
+.options label:not(.wrong):not(.correct) input:checked ~ .check:before {
+  background: #28b8e6;
+}
+.options label input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.options label:hover {
+  cursor: pointer;
+  border-color: #28b8e6;
+}
+.options label.checked, .options label:hover .check {
+  border-color: #28b8e6;
+}
+.options label.correct {
+  color: #08ac00;
+  border-color: #08ac00;
+  font-weight: 700;
+}
+.options label.correct .check:before {
+  top: -5px;
+  left: 7px;
+  width: 10px;
+  height: 20px;
+  border-radius: 0;
+  background: none!important;
+  border: solid #08ac00;
+  border-width: 0 5px 5px 0;
+  transform: rotate(45deg);
+}
+.options label.wrong {
+  border-color: red;
+  color: red;
+  font-weight: 700;
+}
+.options label.wrong .check {
+  border-color: red;
+}
+.options label.wrong .check:before {
+  background: red;
+}
+.options label.correct .check {
+  border: none!important;
+}
+
+button {
+  font-size: 1.5rem;
+  color: #fff;
+  padding: 12px 50px;
+  background: #28b8e6;
+  font-weight: 700;
+  border: 0;
+  cursor: pointer;
+  box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
+  transition: all 0.25s ease-out;
+}
+button:hover {
+  background: #178db3;
+}
+button[disabled] {
+  background: #ddd;
+  cursor: not-allowed;
+}
+
+.topics-wrapper {
+  text-align: center;
+}
+.topics {
+  list-style: none;
+  padding: 0;
+  width: 300px;
+  margin: 60px auto 0;
+  max-width: 90%;
+}
+.topics li {
+  margin-bottom: 20px;
+}
+.topics li > a {
+  display: block;
+  text-decoration: none;
+  padding: 12px 20px;
+  border: 1px solid #28b8e6;
+  font-size: 1.2rem;
+  color: #28b8e6;
+  transition: all .35s;
+  font-weight: 600;
+  background: #fff;
+}
+.topics li > a:hover {
+  background: #28b8e6;
+  color: #fff;
+}
+
+input {
+  width: 100%;
+  display: block;
+  font-size: 1.2rem;
+  border: 2px solid #ddd;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+input:hover, input:focus {
+  border-color: #28b8e6;
+}
